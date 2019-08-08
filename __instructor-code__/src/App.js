@@ -9,11 +9,11 @@ import Transfer from './components/Transfer/Transfer'
 function App() {
   return (
     <div className="App">
-      <Nav />
-      <Dashboard />
-      <Landing />
-      <Transaction />
-      <Transfer />
+      <Nav/>
+      <Dashboard/>
+      <Landing/>
+      <Transaction/>
+      <Transfer/>
     </div>
   );
 }
