@@ -30,6 +30,18 @@ class Landing extends Component {
         })
     }
 
+    login = () => {
+        const {emailInput: email, passwordInput: password} = this.state
+        axios.post('/auth/login', {email, password}).then(res => {
+            const {username, email} = res.data.user
+            this.props.setUser({username, email})
+            this.props.history.push('/dashboard')
+        })
+        .catch(err => {
+            alert('Try again')
+        })
+    }
+
     render() {
         return (
             <div className='Landing'>
@@ -44,7 +56,7 @@ class Landing extends Component {
                         <input onChange={e => this.handleChange(e, 'emailInput')} type='text' placeholder='email' />
                         <input onChange={e => this.handleChange(e, 'passwordInput')} type='password' placeholder='password' />
                         <button onClick={this.registerUser}>Register</button>
-                        <button>Login</button>
+                        <button onClick={this.login}>Login</button>
                     </div>
                 </div>
             </div>

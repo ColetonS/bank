@@ -1,23 +1,38 @@
-import React, {Component} from 'react'
-import './Transfer.css'
-import {Link} from 'react-router-dom'
+import React, { Component } from "react";
+import "./Transfer.css";
+import { Link } from "react-router-dom";
+import Dropdown from "../Dropdown/Dropdown";
 
 export default class Transfer extends Component {
-    state = {
-        account: '',
-        amount: 0,
-        transactionType: ''
-    }
-    
-    render() {
-        return (
-            <div className='Transfer'>
-                Transfer
-                <Link to='/dashboard'>
-                    <button>Cancel</button>
-                </Link>
-                <button>Submit</button>
-            </div>
-        )
-    }
+  state = {
+    account: "savings",
+    amount: 0,
+    transactionType: "Deposit"
+  };
+
+  handleChange = (prop, e) => {
+    this.setState({
+      [prop]: e.target.value
+    });
+  };
+
+  render() {
+    return (
+      <div className="Transfer">
+        <Dropdown handleChange={this.handleChange} prop="transactionType">
+          <option value="deposit">Deposit</option>
+          <option value="withdraw">Withdraw</option>
+        </Dropdown>
+        <Dropdown handleChange={this.handleChange} prop="account">
+          <option value="savings">Savings</option>
+          {/* <option value='checking'>Checking</option> */}
+        </Dropdown>
+        <input onChange={e => this.handleChange('amount', e)} type="number" />
+        <Link to="/dashboard">
+          <button>Cancel</button>
+        </Link>
+        <button>Submit</button>
+      </div>
+    );
+  }
 }
